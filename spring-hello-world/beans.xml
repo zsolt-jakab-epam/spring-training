@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-init-method="init" default-destroy-method="destroy">
 
 
 	<bean id="person" class="com.jazs.spring.test.Person" name="Mary"
-		scope="prototype" init-method="onCreate" destroy-method="onDestroy">
+		scope="singleton" init-method="onCreate" destroy-method="onDestroy">
 		<constructor-arg value="777" name="id" type="int"></constructor-arg>
 		<constructor-arg value="Mary" name="name" type="String"></constructor-arg>
 		<constructor-arg name="address" ref="address"
