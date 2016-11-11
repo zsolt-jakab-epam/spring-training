@@ -9,9 +9,9 @@ tmp/
 *.bak
 *.swp
 *~.nib
-local.properties
+local.properties 
 .settings/
-*target/
+target/
 .loadpath
 .recommenders
 
