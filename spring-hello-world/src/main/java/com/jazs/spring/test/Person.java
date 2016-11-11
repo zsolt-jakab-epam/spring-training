@@ -19,6 +19,11 @@ public class Person {
 		this.address = address;
 	}
 	
+	public static Person getInstance(int id, String name, Address address) {
+		System.out.println("Creating user using factory method.");
+		return new Person(1234, "Bob", new Address(null, null));
+	}
+	
 	public int getTaxId() {
 		return taxId;
 	}

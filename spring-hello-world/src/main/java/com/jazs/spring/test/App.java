@@ -11,10 +11,14 @@ public class App {
 		
 		ApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
 		
-		Person person1 = (Person)context.getBean("person");
-		Person person2 = (Person)context.getBean("person");
+		Person person = (Person)context.getBean("person");
 		
-		System.out.println(person2);
+		person.setTaxId(888);
+		
+		System.out.println(person);
+		
+		Address address2 = (Address)context.getBean("address2");
+		System.out.println(address2);
 		
 		((FileSystemXmlApplicationContext)context).close();
 	}
