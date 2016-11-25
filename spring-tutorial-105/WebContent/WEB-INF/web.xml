@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <display-name>without-spring</display-name>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>spring-tutorial-50</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -20,7 +20,7 @@
     <servlet-name>offers</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <description>Spring database</description>
+  <description>Spring Database</description>
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/spring</res-ref-name>
@@ -33,10 +33,10 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-  	classpath:com/jazs/spring/web/config/dao-context.xml
-  	classpath:com/jazs/spring/web/config/service-context.xml
-  	classpath:com/jazs/spring/web/config/security-context.xml
-  	</param-value>
+		classpath:com/caveofprogramming/spring/web/config/dao-context.xml
+		classpath:com/caveofprogramming/spring/web/config/service-context.xml
+		classpath:com/caveofprogramming/spring/web/config/security-context.xml
+		</param-value>
   </context-param>
   <filter>
     <display-name>springSecurityFilterChain</display-name>
