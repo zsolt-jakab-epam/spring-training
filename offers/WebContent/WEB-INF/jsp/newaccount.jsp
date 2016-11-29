@@ -78,14 +78,14 @@
 			<tr>
 				<td class="label">Password:</td>
 				<td><sf:input id="password" name="password" path="password"
-						type="text" /><br />
+						type="password" /><br />
 				<div class="error">
 						<sf:errors path="password"></sf:errors>
 					</div></td>
 			</tr>
 			<tr>
 				<td class="label">Confirm Password:</td>
-				<td><input id="confirmpass" name="confirmpass" type="text" />
+				<td><input id="confirmpass" name="confirmpass" type="password" />
 				<div id="matchpass"></div></td>
 			</tr>
 			<tr>

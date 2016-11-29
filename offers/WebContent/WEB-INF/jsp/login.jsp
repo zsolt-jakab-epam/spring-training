@@ -28,10 +28,13 @@
 				<td><input type='password' name='password' /></td>
 			</tr>
 			<tr>
+				<td>Remember me:</td>
+				<td><input type='checkbox' name='remember-me' checked="checked" /></td>
+			</tr>			
+			<tr>
 				<td colspan='2'><input name="submit" type="submit"
 					value="Login" /></td>
 			</tr>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		</table>
 	</form>
 	<p><a href='<c:url value="/newaccount"/>'>Create new account</a><p/>

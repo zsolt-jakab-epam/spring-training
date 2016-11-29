@@ -3,6 +3,7 @@ package com.jazs.spring.web.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.jazs.spring.web.dao.Offer;
@@ -22,11 +23,8 @@ public class OffersService {
 		return offersDAO.getOffers();
 	}
 
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
 	public void create(Offer offer) {
 		offersDAO.create(offer);		
-	}
-
-	public void throwTestException() {
-		offersDAO.getOffer(99999);
 	}
 }

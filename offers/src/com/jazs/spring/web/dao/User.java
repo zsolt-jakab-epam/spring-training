@@ -10,13 +10,13 @@ import com.jazs.spring.web.validation.ValidEmail;
 public class User {
 	
 	@NotBlank
-	@Size(min=8, max=15)
-	@Pattern(regexp="^\\w{8,}$")
+	@Size(min=4, max=15)
+	@Pattern(regexp="^\\w{4,}$")
 	private String username;
 	
 	@NotBlank
 	@Pattern(regexp="^\\S+$")
-	@Size(min=8, max=15)
+	@Size(min=4, max=15)
 	private String password;
 	
 	private boolean enabled = false;
