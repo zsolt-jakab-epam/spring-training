@@ -38,11 +38,40 @@ textarea {
 }
 
 table.offers {
-	padding: 10px;
+	padding: 20px;
 	border: 1px solid gray;
 }
 
 p.error {
 	font-size: medium;
-	color: red;
+}
+
+div.footer {
+	font-size: small;
+	color: gray;
+}
+
+div.content {
+	position: relative;
+	padding: 40px;
+}
+
+div.header {
+	position: relative;
+	text-align: center;
+	width: 100%;
+	height: 40px;
+	background-color: red;
+}
+
+a.login {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: white;
+}
+
+a.title {
+	color: white;
+	font-size: 35px;
 }
