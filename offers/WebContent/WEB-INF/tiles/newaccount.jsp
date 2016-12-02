@@ -17,6 +17,13 @@
 				</div></td>
 		</tr>
 		<tr>
+			<td class="label">Name:</td>
+			<td><sf:input name="name" path="name" type="text" /><br />
+				<div class="error">
+					<sf:errors path="name"></sf:errors>
+				</div></td>
+		</tr>		
+		<tr>
 			<td class="label">Email:</td>
 			<td><sf:input name="email" path="email" type="text" /><br />
 				<div class="error">
