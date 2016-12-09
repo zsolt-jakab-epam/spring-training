@@ -17,8 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-@Component("offersDAO")
-public class OffersDAO {
+@Component("messagesDAO")
+public class MessagesDAO {
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -28,52 +28,42 @@ public class OffersDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Offer> getOffers() {
+	public List<Message> getMessages() {
 		
-		Criteria criteria = session().createCriteria(Offer.class);
-		
-		criteria.createAlias("user", "u");
-		
-		criteria.add(Restrictions.eq("u.enabled", true));
+		Criteria criteria = session().createCriteria(Message.class);
 		
 		return criteria.list();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Offer> getOffers(String username) {
+	public List<Message> getMessages(String username) {
 		
-		Criteria criteria = session().createCriteria(Offer.class);
+		Criteria criteria = session().createCriteria(Message.class);
 		
-		criteria.createAlias("user", "u");
+		criteria.add(Restrictions.eq("username", username));
 		
-		criteria.add(Restrictions.eq("u.enabled", true));
-		criteria.add(Restrictions.eq("u.username", username));
-		
-		return criteria.list();
-		
+		return criteria.list();		
 	}
 	
-	public void saveOrUpdate(Offer offer) {
-		session().saveOrUpdate(offer);
+	public void saveOrUpdate(Message message) {
+		System.out.println(message);
+		session().saveOrUpdate(message);
 	}
 	
 	public boolean delete(int id) {
 		
-		Query query = session().createQuery("delete from Offer where id= :id");
+		Query query = session().createQuery("delete from Message where id= :id");
 		query.setLong("id", id);
 		return query.executeUpdate() == 1;
 	}
 	
-	public Offer getOffer(int id) {
+	public Message getMessage(int id) {
 		
-		Criteria criteria = session().createCriteria(Offer.class);
-		
-		criteria.createAlias("user", "u");
-		
-		criteria.add(Restrictions.eq("u.enabled", true));
+		Criteria criteria = session().createCriteria(Message.class);
+			
 		criteria.add(Restrictions.idEq(id));
 		
-		return (Offer)criteria.uniqueResult();				
+		return (Message)criteria.uniqueResult();				
 	}
 
 }

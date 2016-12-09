@@ -1,5 +1,11 @@
 package com.jazs.spring.web.dao;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -7,27 +13,36 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.jazs.spring.web.validation.ValidEmail;
 
-public class User {
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 	
-	@NotBlank
-	@Size(min=4, max=15)
-	@Pattern(regexp="^\\w{4,}$")
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@NotBlank(groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Size(min=4, max=15, groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Pattern(regexp="^\\w{4,}$", groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Id
+	@Column(name="username")
 	private String username;
 	
-	@NotBlank
-	@Pattern(regexp="^\\S+$")
-	@Size(min=4, max=15)
+	@NotBlank(groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Pattern(regexp="^\\S+$", groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Size(min=4, max=15, groups = {FormValidationGroup.class})
 	private String password;
 	
 	private boolean enabled = false;
 	
 	private String authority;
 	
-	@ValidEmail
+	@ValidEmail(groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
 	private String email;
 	
-	@NotBlank
-	@Size(min=4, max=60)
+	@NotBlank(groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
+	@Size(min=4, max=60, groups = {PersistenceValidationGroup.class, FormValidationGroup.class})
 	private String name;
 
 	public User() {

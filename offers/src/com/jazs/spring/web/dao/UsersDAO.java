@@ -2,53 +2,49 @@ package com.jazs.spring.web.dao;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component("usersDao")
+@Repository
+@Transactional
+@Component("usersDAO")
 public class UsersDAO {
-	
-	private NamedParameterJdbcTemplate jdbc;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public void setDataSource(DataSource jdbc) {
-		this.jdbc = new NamedParameterJdbcTemplate(jdbc);
+	private SessionFactory sessionFactory;
+	
+	public Session session() {
+		return sessionFactory.getCurrentSession();
 	}
-
+	
 	@Transactional
-	public boolean create(User user) {
-		
-		MapSqlParameterSource params = new MapSqlParameterSource();
-		
-		params.addValue("username", user.getUsername());
-		params.addValue("password", passwordEncoder.encode(user.getPassword()));
-		params.addValue("name", user.getName());
-		params.addValue("email", user.getEmail());
-		params.addValue("enabled", user.isEnabled());
-		params.addValue("authority", user.getAuthority());
-		
-		
-		
-		return jdbc.update("insert into users (username, name, password, email, enabled, authority) values (:username, :name, :password, :email, :enabled, :authority)", params) == 1;
+	public void create(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		session().save(user);
 	}
 
 	public boolean exists(String username) {
-		return jdbc.queryForObject("select count(*) from users where username=:username", 
-				new MapSqlParameterSource("username", username), Integer.class) > 0;
+		return getUser(username) != null;
 	}
 
 	public List<User> getAllUsers() {
-		return jdbc.query("select * from users", BeanPropertyRowMapper.newInstance(User.class));
+		return session().createQuery("from User").list();
+	}
+	
+	public User getUser(String username) {
+		Criteria criteria = session().createCriteria(User.class);
+		criteria.add(Restrictions.idEq(username));
+		return (User)criteria.uniqueResult();		
 	}
 
 }
